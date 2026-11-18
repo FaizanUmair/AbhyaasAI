@@ -1,0 +1,230 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --foreground-rgb: 15, 23, 42;
+  --background-start-rgb: 248, 250, 252;
+  --background-end-rgb: 255, 255, 255;
+  
+  --primary: 79, 70, 229;
+  --accent: 16, 185, 129;
+}
+
+.dark {
+  --foreground-rgb: 248, 250, 252;
+  --background-start-rgb: 15, 23, 42;
+  --background-end-rgb: 2, 6, 23;
+}
+
+@layer base {
+  body {
+    @apply antialiased text-slate-900 bg-slate-50 min-h-screen selection:bg-brand-100 selection:text-brand-800;
+    color: rgb(var(--foreground-rgb));
+  }
+}
+
+@layer components {
+  /* ── Core card styles ── */
+  .card {
+    background-color: #ffffff;
+    border: 1px solid #f1f5f9;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgb(15 23 42 / 0.08), 0 1px 2px -1px rgb(15 23 42 / 0.08);
+    transition: all 200ms ease;
+  }
+
+  .dark .card {
+    background-color: #0f172a;
+    border-color: #1e293b;
+  }
+
+  .card-hover {
+    @apply bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl shadow-card transition-all duration-200 hover:shadow-card-hover hover:border-brand-200 dark:hover:border-brand-700 cursor-pointer;
+  }
+
+  /* Legacy glass classes — kept for compat but redirected to new card style */
+  .glass {
+    @apply bg-white/80 backdrop-blur-sm border border-slate-100/80 shadow-card;
+  }
+  
+  .glass-dark {
+    @apply bg-slate-900/80 backdrop-blur-sm border border-slate-800 shadow-card;
+  }
+
+  .glass-card {
+    @apply bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl shadow-card transition-all duration-200;
+  }
+
+  .interactive-glass {
+    @apply glass-card hover:shadow-card-hover hover:border-brand-200 dark:hover:border-brand-700 hover:-translate-y-0.5 active:scale-[0.99] cursor-pointer;
+  }
+
+  /* ── Button base ── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-medium rounded-lg px-4 py-2 text-sm transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 select-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-600 text-white hover:bg-brand-700 shadow-sm hover:shadow-brand-600/25;
+  }
+
+  .btn-secondary {
+    @apply btn bg-accent-500 text-white hover:bg-accent-600 shadow-sm hover:shadow-accent-500/25;
+  }
+
+  .btn-outline {
+    @apply btn border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-brand-400 hover:text-brand-600 dark:hover:border-brand-500 dark:hover:text-brand-400 bg-white dark:bg-slate-900;
+  }
+
+  .btn-ghost {
+    @apply btn text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100;
+  }
+
+  .btn-danger {
+    @apply btn bg-rose-500 text-white hover:bg-rose-600 shadow-sm;
+  }
+
+  /* ── Form inputs ── */
+  .input {
+    @apply w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/15 transition-all duration-200;
+  }
+
+  .textarea {
+    @apply input min-h-[100px] resize-none;
+  }
+
+  .select {
+    @apply input appearance-none cursor-pointer;
+  }
+
+  /* ── Badge/tag ── */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300;
+  }
+
+  .badge-success {
+    @apply badge bg-accent-50 text-accent-700 dark:bg-accent-900/40 dark:text-accent-300;
+  }
+
+  .badge-warning {
+    @apply badge bg-amber-50 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300;
+  }
+
+  .badge-danger {
+    @apply badge bg-rose-50 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300;
+  }
+
+  /* ── Section header ── */
+  .section-header {
+    @apply flex items-center justify-between mb-4;
+  }
+
+  .section-title {
+    @apply text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2;
+  }
+
+  /* ── Page header ── */
+  .page-title {
+    @apply text-2xl font-bold text-slate-900 dark:text-white tracking-tight;
+  }
+
+  .page-subtitle {
+    @apply text-sm text-slate-500 dark:text-slate-400 mt-1;
+  }
+
+  /* ── Stat ring ── */
+  .stat-ring {
+    @apply relative w-14 h-14 shrink-0;
+  }
+}
+
+/* ── Scrollbar ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c7d2fe transparent;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-brand-200 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-brand-400;
+}
+
+/* ── 3D Flashcard Flip ── */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* ── Gradient text ── */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-accent-600;
+}
+
+/* ── Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  @apply rounded-lg;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+}
+
+/* ── Progress bar ── */
+.progress-bar {
+  @apply w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full bg-brand-500 rounded-full transition-all duration-700 ease-out;
+}
+
+/* ── Sidebar nav active indicator ── */
+.nav-active {
+  @apply bg-brand-50 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 font-semibold border-l-2 border-brand-600;
+}
